@@ -1,0 +1,14 @@
+<section class="phx-hero">
+  <h1><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h1>
+  <p>Peace of mind from prototype to production</p><br><br>
+  <p>POST Request</p>
+  <form action="localhost:4000/api#post" method="post">
+    <p><input type="text" name="str"></p>
+    <p><input type="submit" value="Send"></p>
+ </form>
+  <p>GET Request</p>
+  <form action="localhost:4000/api#get" method="get">
+    <p><input type="submit" value="Send"></p>
+ </form>
+</section>
+
