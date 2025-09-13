@@ -11,6 +11,8 @@ defmodule Hello2Web.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug CORSPlug, origin: "*"
+    plug Hello2Web.Plugs.RequestLogger
   end
 
   scope "/", Hello2Web do
@@ -22,8 +24,22 @@ defmodule Hello2Web.Router do
   # Other scopes may use custom stacks.
   scope "/api", Hello2Web do
     pipe_through :api
-	post "/api", ApiController, :apiPost
-	get "/api", ApiController, :apiGet
+    
+    # Основные API endpoints
+    post "/", ApiController, :apiPost
+    get "/", ApiController, :apiGet
+    
+    # Дополнительные endpoints
+    get "/status", ApiController, :status
+    post "/echo", ApiController, :echo
+    get "/health", ApiController, :health
+    
+    # Дополнительные пользовательские endpoints (должны быть до resources)
+    get "/users/search/:query", UserController, :search
+    get "/users/search", UserController, :search_by_query
+    
+    # CRUD endpoints для пользователей
+    resources "/users", UserController, except: [:new, :edit]
   end
 
   # Enables LiveDashboard only for development

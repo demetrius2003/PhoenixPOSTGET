@@ -1,14 +1,73 @@
 <section class="phx-hero">
   <h1><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h1>
   <p>Peace of mind from prototype to production</p><br><br>
-  <p>POST Request</p>
-  <form action="localhost:4000/api#post" method="post">
-    <p><input type="text" name="str"></p>
-    <p><input type="submit" value="Send"></p>
- </form>
-  <p>GET Request</p>
-  <form action="localhost:4000/api#get" method="get">
-    <p><input type="submit" value="Send"></p>
- </form>
+  
+  <div style="margin: 20px 0;">
+    <h3>POST Request</h3>
+    <form action="/api" method="post">
+      <p><input type="text" name="message" placeholder="Enter message" style="padding: 8px; width: 200px;"></p>
+      <p><input type="text" name="user" placeholder="Enter username" style="padding: 8px; width: 200px;"></p>
+      <p><input type="submit" value="Send POST" style="padding: 8px 16px; background: #007bff; color: white; border: none; border-radius: 4px;"></p>
+    </form>
+  </div>
+  
+  <div style="margin: 20px 0;">
+    <h3>GET Request</h3>
+    <form action="/api" method="get">
+      <p><input type="text" name="query" placeholder="Enter query parameter" style="padding: 8px; width: 200px;"></p>
+      <p><input type="submit" value="Send GET" style="padding: 8px 16px; background: #28a745; color: white; border: none; border-radius: 4px;"></p>
+    </form>
+  </div>
+  
+  <div style="margin: 20px 0;">
+    <h3>CRUD API Endpoints</h3>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+      <div>
+        <h4>Users CRUD</h4>
+        <p><strong>POST /api/users</strong> - Create user</p>
+        <p><strong>GET /api/users</strong> - List users (with pagination)</p>
+        <p><strong>GET /api/users/:id</strong> - Get user by ID</p>
+        <p><strong>PUT /api/users/:id</strong> - Update user</p>
+        <p><strong>DELETE /api/users/:id</strong> - Delete user</p>
+        <p><strong>GET /api/users/search/:query</strong> - Search users</p>
+      </div>
+      <div>
+        <h4>General API</h4>
+        <p><strong>POST /api</strong> - Send data via POST request</p>
+        <p><strong>GET /api</strong> - Send data via GET request</p>
+        <p><strong>GET /api/status</strong> - Check API status</p>
+        <p><strong>POST /api/echo</strong> - Echo back received data</p>
+        <p><strong>GET /api/health</strong> - Health check</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin: 20px 0;">
+    <h3>Test CRUD Operations</h3>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+      <div>
+        <h4>Create User</h4>
+        <form action="/api/users" method="post" style="border: 1px solid #ddd; padding: 15px; border-radius: 5px;">
+          <p><input type="text" name="name" placeholder="Name" style="padding: 8px; width: 100%; margin-bottom: 10px;"></p>
+          <p><input type="email" name="email" placeholder="Email" style="padding: 8px; width: 100%; margin-bottom: 10px;"></p>
+          <p><input type="number" name="age" placeholder="Age" style="padding: 8px; width: 100%; margin-bottom: 10px;"></p>
+          <p><textarea name="bio" placeholder="Bio" style="padding: 8px; width: 100%; margin-bottom: 10px; height: 60px;"></textarea></p>
+          <p><input type="submit" value="Create User" style="padding: 8px 16px; background: #007bff; color: white; border: none; border-radius: 4px; width: 100%;"></p>
+        </form>
+      </div>
+      <div>
+        <h4>Search Users</h4>
+        <form action="/api/users/search" method="get" style="border: 1px solid #ddd; padding: 15px; border-radius: 5px;">
+          <p><input type="text" name="query" placeholder="Search by name or email" style="padding: 8px; width: 100%; margin-bottom: 10px;"></p>
+          <p><input type="submit" value="Search" style="padding: 8px 16px; background: #28a745; color: white; border: none; border-radius: 4px; width: 100%;"></p>
+        </form>
+        <p style="margin-top: 10px; font-size: 12px; color: #666;">
+          Note: Search uses GET parameter, but API expects path parameter. 
+          <a href="/api/users/search/test" target="_blank" style="color: #007bff;">Try direct API call</a>
+        </p>
+        <p style="margin-top: 10px;"><a href="/api/users" target="_blank" style="color: #007bff;">View All Users (JSON)</a></p>
+      </div>
+    </div>
+  </div>
 </section>
 
